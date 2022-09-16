@@ -31,11 +31,16 @@ frog@lago:~$ bash VaultFrog.sh
 ```
 frog@lago:~$  bash VaultFrog.sh --list
 ```
-[![Banner](img/04.png)](Store)  
+[![Banner](img/04.png)](List)  
 #### Recover:  
 ```
 frog@lago:~$ bash VaultFrog.sh --view-pass SITE_NAME USER_NAME
 ```
 [![Banner](img/03.png)](Recover)  
+#### Guard:  
+```
+frog@lago:~$ bash VaultFrog.sh --guard SITE_NAME USER_NAME PASSWORD
+```
+[![Banner](img/05.png)](Guard)  
 
 :frog:
