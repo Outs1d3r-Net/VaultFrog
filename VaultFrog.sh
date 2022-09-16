@@ -3,7 +3,12 @@
 if [ "$1" == "--help" ] || [ "$1" == "-h" ];then
 
     #Help
-    echo -e "[*] Valt Frog Help [*]\n\n--view-pass SITE USER\nbash $0 # for start vaultfrog.\n[*]"
+    echo -e "[*] Vault Frog Help [*]\n\n\t--view-pass SITE USER\t# For get cred.\n\t--help or -h\t\t# Show this message\n\t--list or -l\t\t# Show creds store.\n\t/bin/bash $0\t# For start vaultfrog.\n\n[*]"
+    exit 0;
+
+elif [ "$1" == "--list" ] || [ "$1" == "-l" ];then
+
+    sqlite3 $HOME/.vaultfrog/.creds.db "select site,userN from secrets;" | column -s "|" -t
     exit 0;
 
 elif [ "$1" == "--view-pass" ];then
