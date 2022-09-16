@@ -17,7 +17,7 @@ elif [ "$1" == "--view-pass" ];then
     openssl enc -d -aes-256-cbc -a -salt -in $fEnc
 
     #Clear.
-    echo '' >> $fEnc
+    echo 'croack!' > $fEnc
     rm -rf $fEnc
     exit 0;
 fi
@@ -63,7 +63,7 @@ else
     echo -e "\n\n[*] Vault Frog [*]\n\n\tSite: $site\n\tUsername: $userN\n\tLength: $lenpwd\n\tPassword: $pass\n------------------------------------------------------------\n"
 
     # Clear encrypt files.
-    echo '' >> $fENc
+    echo 'croack!' > $fENc
     rm -rf $fEnc
 
 fi
