@@ -26,6 +26,11 @@ frog@lago:~$ bash VaultFrog.sh --help
 frog@lago:~$ bash VaultFrog.sh 
 ```
 [![Banner](img/02.png)](Store)  
+#### List creds:  
+```
+frog@lago:~$  bash VaultFrog.sh --list
+```
+[![Banner](img/04.png)](Store)  
 #### Recover:  
 ```
 frog@lago:~$ bash VaultFrog.sh --view-pass SITE_NAME USER_NAME
