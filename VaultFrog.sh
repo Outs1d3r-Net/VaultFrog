@@ -3,7 +3,7 @@
 if [ "$1" == "--help" ] || [ "$1" == "-h" ];then
 
     # Help
-    echo -e "[*] Vault Frog Help [*]\n\n\t--view-pass SITE USER\t# For get cred.\n\t--help or -h\t\t# Show this message\n\t--list or -l\t\t# Show creds store.\n\t--update ID USERNAME NEW_PASSWORD # Update cred password.\t\n\t--guard SITE_NAME USER_NAME PASSWORD # For add creds.\t\t\n\n\t/bin/bash $0\t# For start vaultfrog.\n\n[*]"
+    echo -e "[*] Vault Frog Help [*]\n\n\t--view-pass SITE USER\t# For get cred.\n\t--help or -h\t\t# Show this message\n\t--list or -l\t\t# Show creds store.\n\t--update ID USERNAME # Update cred password.\t\n\t--guard SITE_NAME USER_NAME # For add creds.\t\t\n\n\t/bin/bash $0\t# For start vaultfrog.\n\n[*]"
     exit 0;
 
 elif [ "$1" == "--list" ] || [ "$1" == "-l" ];then
@@ -16,7 +16,8 @@ elif [ "$1" == "--update" ];then
 
     # Update method.
     fEnc="/tmp/.vaultfrog$RANDOM.f"
-    echo $4 >> $fEnc
+    read -p "Enter Password: " pass;
+    echo $pass >> $fEnc
     passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc)"
     sqlite3 $HOME/.vaultfrog/.creds.db "UPDATE secrets SET pass='$passEnc' WHERE id='$2' AND userN='$3'"
 
@@ -30,7 +31,8 @@ elif [ "$1" == "--guard" ];then
 
     # Add creds method.
     fEnc="/tmp/.vaultfrog$RANDOM.f"
-    echo $4 >> $fEnc
+    read -p "Enter Password: " pass;
+    echo $pass >> $fEnc
     passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc)"
     sqlite3 $HOME/.vaultfrog/.creds.db "INSERT INTO secrets (site,userN,pass) VALUES ('$2','$3','$passEnc');"
     clear
