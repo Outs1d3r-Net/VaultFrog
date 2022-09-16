@@ -21,6 +21,7 @@ elif [ "$1" == "--update" ];then
     sqlite3 $HOME/.vaultfrog/.creds.db "UPDATE secrets SET pass='$passEnc' WHERE id='$2' AND userN='$3'"
 
     # Clear.
+    history -wc
     echo "croack!" > $fEnc
     rm -rf $fEnc
     exit 0;
@@ -36,6 +37,7 @@ elif [ "$1" == "--guard" ];then
     echo "[*] Credential:--> $2:$3 --> add successful."
 
     # Clear.
+    history -wc
     echo "croack!" > $fEnc
     rm -rf $fEnc
     exit 0;
@@ -51,6 +53,7 @@ elif [ "$1" == "--view-pass" ];then
     openssl enc -d -aes-256-cbc -a -salt -in $fEnc
 
     # Clear.
+    history -wc
     echo "croack!" > $fEnc
     rm -rf $fEnc
     exit 0;
@@ -97,6 +100,7 @@ else
     echo -e "\n\n[*] Vault Frog [*]\n\n\tSite: $site\n\tUsername: $userN\n\tLength: $lenpwd\n\tPassword: $pass\n------------------------------------------------------------\n"
 
     # Clear encrypt files.
+    history -wc
     echo "croack!" > $fEnc
     rm -rf $fEnc
 
