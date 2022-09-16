@@ -1,5 +1,6 @@
 # Vault Frog v4.0 :frog:  
 > A simple password vault based in bash using AES-256-CBC.  
+#  
 [![Banner](img/00.png)](Banner)  
 #  
 ### Requirements:  
