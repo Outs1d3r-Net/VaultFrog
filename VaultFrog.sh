@@ -3,7 +3,7 @@
 if [ "$1" == "--help" ] || [ "$1" == "-h" ];then
 
     # Help
-    echo -e "[*] Vault Frog Help [*]\n\n\t--view-pass SITE USER\t# For get cred.\n\t--help or -h\t\t# Show this message\n\t--list or -l\t\t# Show creds store.\n\t--update ID USERNAME NEW_PASSWORD # Update cred password.\t\n\t--guard SITE_NAME USER_NAME PASSWORD # For add creds.\t\t\n\t/bin/bash $0\t# For start vaultfrog.\n\n[*]"
+    echo -e "[*] Vault Frog Help [*]\n\n\t--view-pass SITE USER\t# For get cred.\n\t--help or -h\t\t# Show this message\n\t--list or -l\t\t# Show creds store.\n\t--update ID USERNAME NEW_PASSWORD # Update cred password.\t\n\t--guard SITE_NAME USER_NAME PASSWORD # For add creds.\t\t\n\n\t/bin/bash $0\t# For start vaultfrog.\n\n[*]"
     exit 0;
 
 elif [ "$1" == "--list" ] || [ "$1" == "-l" ];then
