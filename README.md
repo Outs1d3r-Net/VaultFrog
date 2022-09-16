@@ -4,7 +4,7 @@
 #  
 ### Requirements:  
  * Openssl
- * sqlite3
+ * Sqlite3
 #### Install openssl:  
 ```
 frog@lago:~$ sudo apt update
@@ -28,7 +28,7 @@ frog@lago:~$ bash VaultFrog.sh
 [![Banner](img/02.png)](Store)  
 #### Recover:  
 ```
-frog@lago:~$ vash VaultFrog.sh --view-pass SITE_NAME USER_NAME
+frog@lago:~$ bash VaultFrog.sh --view-pass SITE_NAME USER_NAME
 ```
 [![Banner](img/03.png)](Recover)  
 
