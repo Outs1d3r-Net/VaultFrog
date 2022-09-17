@@ -30,6 +30,10 @@ elif [ "$1" == "--update" ];then
 elif [ "$1" == "--guard" ];then
 
     # Add creds method.
+    if [ ! -e $HOME/.vaultfrog/.creds.db ];then
+        mkdir -p $HOME/.vaultfrog/
+        sqlite3 $HOME/.vaultfrog/.creds.db "CREATE TABLE secrets (id INTEGER PRIMARY KEY,site TEXT,userN TEXT,pass TEXT);
+    fi
     fEnc="/tmp/.vaultfrog$RANDOM.f"
     read -p "Enter Password: " pass;
     echo $pass >> $fEnc
