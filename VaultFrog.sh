@@ -3,7 +3,7 @@
 if [ "$1" == "--help" ] || [ "$1" == "-h" ];then
 
     # Help
-    echo -e "[*] Vault Frog Help [*]\n\n\t--view-pass SITE USER\t# For get cred.\n\t--help or -h\t\t# Show this message\n\t--list or -l\t\t# Show creds store.\n\t--update ID USERNAME # Update cred password.\t\n\t--guard SITE_NAME USER_NAME # For add creds.\t\t\n\n\t/bin/bash $0\t# For start vaultfrog.\n\n[*]"
+    echo -e "[*] Vault Frog Help [*]\n\n\t--view-pass SITE USER\t\t\t# For get cred.\n\t--help or -h\t\t\t\t# Show this message\n\t--list or -l\t\t\t\t# Show creds store.\n\t--update ID USERNAME\t\t\t# Update cred password.\t\n\t--guard SITE_NAME USER_NAME\t\t# For add creds.\t\t\n\t--remove ID\t\t\t\t# Remove cred.\n\n\t/bin/bash $0\t\t\t# For start vaultfrog.\n\n[*]"
     exit 0;
 
 elif [ "$1" == "--list" ] || [ "$1" == "-l" ];then
@@ -44,10 +44,32 @@ elif [ "$1" == "--guard" ];then
     rm -rf $fEnc
     exit 0;
 
+elif [ "$1" == "--remove" ];then
+
+    # Add remove method.
+    rcred="$(sqlite3 $HOME/.vaultfrog/.creds.db "SELECT site,userN FROM secrets WHERE id='$2'")"
+    echo $rcred
+    read -p "Are you sure you want to delete this credential ? [Y/N]" qsT;
+    if [ "$qsT" == "y" ] || [ "$qsT" == "Y" ];then
+        read -p "Enter the following phrase to delete the credential:(Long fall):--> " qsT2;
+        if [ "$qsT2" == "Long fall" ];then
+            sqlite3 $HOME/.vaultfrog/.creds.db "DELETE FROM secrets WHERE id='$2'"
+            clear
+            echo "[*] Credential:--> $rcred --> removed !"
+            exit 0;
+        else
+            echo "Error ! No credentials removed."
+            exit 0;
+        fi
+    else
+        echo "No credentials removed."
+        exit 0;
+    fi
+
 elif [ "$1" == "--view-pass" ];then
 
     # Get Encrypt Pass.
-    passR="$(sqlite3 $HOME/.vaultfrog/.creds.db "select pass FROM secrets WHERE site LIKE '%$2%' AND userN='$3';")"
+    passR="$(sqlite3 $HOME/.vaultfrog/.creds.db "SELECT pass FROM secrets WHERE site LIKE '%$2%' AND userN='$3';")"
 
     # Decrypt pass.
     fEnc="/tmp/.vaultfrog$RANDOM.f"
