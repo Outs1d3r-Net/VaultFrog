@@ -42,6 +42,11 @@ frog@lago:~$ bash VaultFrog.sh --view-pass SITE_NAME USER_NAME
 frog@lago:~$ bash VaultFrog.sh --guard SITE_NAME USER_NAME
 ```
 [![Banner](img/05.png)](Guard)  
-[![Banner](img/06.png)](Guard)  
+#### Remove:  
+```
+frog@lago:~$ bash VaultFrog.sh --list
+frog@lago:~$ bash VaultFrog.sh --remove ID
+```
+[![Banner](img/06.png)](Remove)  
 
 :frog:
