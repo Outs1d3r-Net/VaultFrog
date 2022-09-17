@@ -18,7 +18,7 @@ elif [ "$1" == "--update" ];then
     fEnc="/tmp/.vaultfrog$RANDOM.f"
     read -p "Enter Password: " pass;
     echo $pass >> $fEnc
-    passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc)"
+    passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc -pbkdf2)"
     sqlite3 $HOME/.vaultfrog/.creds.db "UPDATE secrets SET pass='$passEnc' WHERE id='$2' AND userN='$3'"
 
     # Clear.
@@ -33,7 +33,7 @@ elif [ "$1" == "--guard" ];then
     fEnc="/tmp/.vaultfrog$RANDOM.f"
     read -p "Enter Password: " pass;
     echo $pass >> $fEnc
-    passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc)"
+    passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc -pbkdf2)"
     sqlite3 $HOME/.vaultfrog/.creds.db "INSERT INTO secrets (site,userN,pass) VALUES ('$2','$3','$passEnc');"
     clear
     echo "[*] Credential:--> $2:$3 --> add successful."
@@ -74,7 +74,7 @@ elif [ "$1" == "--view-pass" ];then
     # Decrypt pass.
     fEnc="/tmp/.vaultfrog$RANDOM.f"
     echo $passR >> $fEnc
-    openssl enc -d -aes-256-cbc -a -salt -in $fEnc
+    openssl enc -d -aes-256-cbc -a -salt -in $fEnc -pbkdf2
 
     # Clear.
     history -wc
@@ -109,7 +109,7 @@ else
     pass="$(</dev/urandom tr -dc 'A-Za-z0-9@#$&_+' | head -c$lenpwd)"
     fEnc="/tmp/.vaultfrog$RANDOM.f"
     echo $pass >> $fEnc
-    passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc)"
+    passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc -pbkdf2)"
 
     # Create or Store data.
     if [ -f $HOME/.vaultfrog/.creds.db ];then
