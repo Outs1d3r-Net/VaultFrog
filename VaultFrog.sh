@@ -8,6 +8,12 @@ if [ "$1" == "--help" ] || [ "$1" == "-h" ];then
 
 elif [ "$1" == "--list" ] || [ "$1" == "-l" ];then
 
+    # Verify if db exists.
+    if [ ! -e $HOME/.vaultfrog/.creds.db ];then
+        mkdir -p $HOME/.vaultfrog/
+        sqlite3 $HOME/.vaultfrog/.creds.db "CREATE TABLE secrets (id INTEGER PRIMARY KEY,site TEXT,userN TEXT,pass TEXT);"
+    fi
+    
     # List method.
     sqlite3 $HOME/.vaultfrog/.creds.db "SELECT id,site,userN FROM secrets;" | column -s "|" -t
     exit 0;
@@ -29,11 +35,13 @@ elif [ "$1" == "--update" ];then
 
 elif [ "$1" == "--guard" ];then
 
-    # Add creds method.
+    # Verify if db exists.
     if [ ! -e $HOME/.vaultfrog/.creds.db ];then
         mkdir -p $HOME/.vaultfrog/
         sqlite3 $HOME/.vaultfrog/.creds.db "CREATE TABLE secrets (id INTEGER PRIMARY KEY,site TEXT,userN TEXT,pass TEXT);"
     fi
+    
+    # Add creds method.
     fEnc="/tmp/.vaultfrog$RANDOM.f"
     read -p "Enter Password: " pass;
     echo $pass >> $fEnc
