@@ -124,7 +124,7 @@ else
     passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc -pbkdf2)"
 
     # Create or Store data.
-    if [ -f $HOME/.vaultfrog/.creds.db ];then
+    if [ -e $HOME/.vaultfrog/.creds.db ];then
         sqlite3 $HOME/.vaultfrog/.creds.db "INSERT INTO secrets (site,userN,pass) VALUES ('$site','$userN','$passEnc');"
     else
         mkdir -p $HOME/.vaultfrog/
