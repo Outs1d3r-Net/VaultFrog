@@ -42,5 +42,6 @@ frog@lago:~$ bash VaultFrog.sh --view-pass SITE_NAME USER_NAME
 frog@lago:~$ bash VaultFrog.sh --guard SITE_NAME USER_NAME
 ```
 [![Banner](img/05.png)](Guard)  
+[![Banner](img/06.png)](Guard)  
 
 :frog:
