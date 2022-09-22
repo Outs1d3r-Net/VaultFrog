@@ -22,7 +22,7 @@ elif [ "$1" == "--update" ];then
 
     # Update method.
     fEnc="/tmp/.vaultfrog$RANDOM.f"
-    read -p "Enter Password: " pass;
+    read -s -p "Enter Password: " pass;
     echo $pass >> $fEnc
     passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc -pbkdf2)"
     sqlite3 $HOME/.vaultfrog/.creds.db "UPDATE secrets SET pass='$passEnc' WHERE id='$2' AND userN='$3'"
@@ -43,7 +43,7 @@ elif [ "$1" == "--guard" ];then
     
     # Add creds method.
     fEnc="/tmp/.vaultfrog$RANDOM.f"
-    read -p "Enter Password: " pass;
+    read -s -p "Enter Password: " pass;
     echo $pass >> $fEnc
     passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc -pbkdf2)"
     sqlite3 $HOME/.vaultfrog/.creds.db "INSERT INTO secrets (site,userN,pass) VALUES ('$2','$3','$passEnc');"
