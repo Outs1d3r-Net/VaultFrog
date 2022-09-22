@@ -27,6 +27,7 @@ elif [ "$1" == "--update" ];then
     echo $pass >> $fEnc
     passEnc="$(openssl enc -aes-256-cbc -a -salt -in $fEnc -pbkdf2)"
     sqlite3 $HOME/.vaultfrog/.creds.db "UPDATE secrets SET pass='$passEnc' WHERE id='$2' AND userN='$3'"
+    echo "[*] Credential ID:--> $2:$3 --> update successful."
 
     # Clear.
     history -wc
